@@ -6,7 +6,7 @@ import java.util.*;
 class BinarySearchTree{
     private Node root;
     private int[] items;
-    int size;
+    public int size;
 
     public BinarySearchTree(){
         root = null;
@@ -22,31 +22,47 @@ class BinarySearchTree{
     public Object root() {
         return root;
     }
-
+    
+    public int countNodes(){
+         return countNodes(root);
+     }
+    
+    private int countNodes(Node r){
+        if (r == null){
+            return 0;
+        }
+        else{
+            int l = 1;
+            l += countNodes(r.getLeft());
+            l += countNodes(r.getRight());
+            return l;
+        }
+    }
+    
     public void coutArray(){
-        System.out.println(items.length);
+        System.out.println(size);
     }
     
     public void tampilArray(){
-        for(int i = 0; i<items.length;i++){
+        for(int i = 0; i<size;i++){
             System.out.print(items[i]+" ");
         }
     }
     
-    public boolean contains(final int[] array, final int key) {
-    for (final int i : array) {
-        if (i == key) {
-            return true;
+    private boolean contains(final int[] array, final int key) {
+        for (final int i : array){
+            if (i == key) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
     
     public void searchPaths(int x){
         searchgetPaths(root, x);
     }
     
-    public void searchgetPaths(Node root,int x){
+    private void searchgetPaths(Node root,int x){
         if(contains(items, x)==true){
             if(root.getData()<x){
             System.out.print(root.getData()+" ");
@@ -71,8 +87,7 @@ class BinarySearchTree{
         return getLeafCount(root);
     }
   
-    public int getLeafCount(Node node){
-        
+    private int getLeafCount(Node node){
         if (node == null){
             return 0;
         }
@@ -84,21 +99,24 @@ class BinarySearchTree{
         }
     }
     
-    public void push(int item){
-//        items = Arrays.copyOf(items, items.length+1);
-        items[size] = item;
-        size++;
-        items = Arrays.copyOf(items, size+1);
-        
-
-    }
-    public void insert(int data){
-        root = insert(root, data);
-        push(data);
+    private void push(int item){
+        if(root == null){
+            items[size] = item;
+            size++;
+        }
+        else{
+        items = Arrays.copyOf(items, items.length+1);
+            items[size] = item;
+            size++;
+        }
     }
     
-    private Node insert(Node node, int data){ 
-        
+    public void insert(int data){
+        push(data);
+        root = insert(root, data);
+    }
+    
+    private Node insert(Node node, int data){
         if (node == null){
              node = new Node(data);
          }
@@ -116,12 +134,12 @@ class BinarySearchTree{
          printPaths(root);
      }
     
-    public void printPaths(Node node) {
+    private void printPaths(Node node) {
         int path[] = new int[1000];
         printPathsRecur(node, path, 0);
     }
   
-    public void printPathsRecur(Node node, int path[], int pathLen){
+    private void printPathsRecur(Node node, int path[], int pathLen){
         if (node == null){
             return;
         }
@@ -139,7 +157,7 @@ class BinarySearchTree{
         }
     }
   
-    public void printArray(int ints[], int len){
+    private void printArray(int ints[], int len){
         int i;
         for (i = 0; i < len; i++) 
         {
@@ -148,15 +166,13 @@ class BinarySearchTree{
         System.out.println();
     }
     
-    public void deleteArray(int k){
-        for(int i=0; i<items.length; i++)
-       {
-           if(items[i] == k)
-           {
-               for(int j=i; j<(items.length-1); j++)
-               {
+    private void deleteArray(int k){
+        for(int i=0; i<items.length; i++){
+           if(items[i] == k){
+               for(int j=i; j<(items.length-1); j++){
                    items[j] = items[j+1];
                }
+               size--;
                break;
            }
         }
@@ -211,22 +227,6 @@ class BinarySearchTree{
             root.setRight(n);             
         }
         return root;
-    }
-     
-    public int countNodes(){
-         return countNodes(root);
-     }
-    
-    private int countNodes(Node r){
-        if (r == null){
-            return 0;
-        }
-        else{
-            int l = 1;
-            l += countNodes(r.getLeft());
-            l += countNodes(r.getRight());
-            return l;
-        }
     }
     
     public boolean search(int val) {
