@@ -1,7 +1,7 @@
 
 package algomod4;
 
-import java.util.*;
+import java.util.Arrays;
 
 class BinarySearchTree{
     private Node root;
