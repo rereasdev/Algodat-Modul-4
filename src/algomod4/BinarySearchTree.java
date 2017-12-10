@@ -182,7 +182,7 @@ class BinarySearchTree{
         if (isEmpty()){
             System.out.println("Tree kosong");
         }
-        else if (search(k) == false){
+        else if (contains(items, k) == false){
             System.out.println("Maaf "+ k +" tidak ada");
         }
         else{
@@ -229,28 +229,28 @@ class BinarySearchTree{
         return root;
     }
     
-    public boolean search(int val) {
-        return search(root, val);
-    }
- 
-    private boolean search(Node r, int val){
-        boolean found = false;
-        while ((r != null) && !found){
-            int rval = r.getData();
-            if (val < rval){
-                r = r.getLeft();
-            }
-            else if (val > rval){
-                r = r.getRight();
-            }
-            else{
-                found = true;
-                break;
-            }
-            found = search(r, val);
-        }
-        return found;
-    }
+//    public boolean search(int val) {
+//        return search(root, val);
+//    }
+// 
+//    private boolean search(Node r, int val){
+//        boolean found = false;
+//        while ((r != null) && !found){
+//            int rval = r.getData();
+//            if (val < rval){
+//                r = r.getLeft();
+//            }
+//            else if (val > rval){
+//                r = r.getRight();
+//            }
+//            else{
+//                found = true;
+//                break;
+//            }
+//            found = search(r, val);
+//        }
+//        return found;
+//    }
     
     public void inorder(){
         inorder(root);

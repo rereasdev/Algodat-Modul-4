@@ -12,7 +12,7 @@ import java.util.Scanner;
             System.out.println("\nBinary Search Tree\n");
             System.out.println("1. Masukkan Data ");
             System.out.println("2. Hapus Data");
-            System.out.println("3. Cari Data dan Tmapilkan route");
+            System.out.println("3. Cari Data dan Tampilkan route");
             System.out.println("4. Hitung Node");
             System.out.println("5. Hitung Leaf");
             System.out.println("6. Cek kosong atau tidak"); 
